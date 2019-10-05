@@ -1,0 +1,17 @@
+<div class="container">
+<h2>Login Form</h2>
+<form method="post">
+	<div class="container">
+		<label for="uname"><b>Username</b></label>
+		<input type="text" placeholder="Enter Username" name="uname" [(ngModel)]="loginData.email">
+
+		<label for="psw"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="loginData.password">
+
+		<button type="button" (click)="doLogin()">Login</button>
+		<label>
+			<span class="psw"> <a href="#">Forgot password?</a></span>
+		</label>
+	</div>
+</form>
+</div>
