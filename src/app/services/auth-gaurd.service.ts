@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
 import { MyCookieService } from './my-cookie.service';
-
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class AuthGaurdService implements CanActivate {
     private router : Router
   ) { }
 
-  canActivate() { 
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) { 
     if(this.myCookieService.checkCookie('user')){
       return true;
     } else{

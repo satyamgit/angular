@@ -7,7 +7,7 @@ import { UnAuthGaurdService } from './services/unauth-gaurd.service';
 
 const routes: Routes = [
     { path: "", component: LoginComponent, canActivate : [UnAuthGaurdService]},
-    { path: "home", component: HomeComponent, canActivate : [AuthGaurdService] },
+    { path: "home", component: HomeComponent, canActivate : [AuthGaurdService], data: {role: 'Admin'}}
 ];
 
 @NgModule({

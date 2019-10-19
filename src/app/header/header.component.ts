@@ -16,7 +16,10 @@ export class HeaderComponent implements OnInit {
 	constructor(public myCookieService:MyCookieService, private toastr: ToastrService, private router : Router) { }
 
 	ngOnInit() {
+		window.scrollTo(0, 0);
 		this.user = this.myCookieService.getCookie('user');
+
+
 	}
 
 	logout(){

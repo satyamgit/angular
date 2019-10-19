@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:'192.168.10.60/project/RestApi/api/'
+  baseUrl:'http://investfarapp.com/api/'
 };
 
 /*
