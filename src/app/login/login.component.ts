@@ -29,11 +29,10 @@ export class LoginComponent implements OnInit {
   doLogin(){
     this.apiLoading=true;
     this.api.postDataApi('login',this.loginData).subscribe((response : any) => {
-      if(response.errorCode == '0' || response.errorCode == '3'){
+      if(response.errorCode == '0'){
         this.setCookieAndNavigate(response.data[0]);
-        // this.toastr.success('Logged in successfully','Thank You');
       } else {
-        this.toastr.error(response.errorMsg, 'Please Try Again');
+        this.toastr.error(response.message, 'Please Try Again');
       }
       this.apiLoading=false;
     },
