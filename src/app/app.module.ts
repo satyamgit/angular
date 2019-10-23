@@ -17,7 +17,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './services/api.service';
 import { AuthGaurdService } from './services/auth-gaurd.service';
 import { MyCookieService } from './services/my-cookie.service';
-
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { Page404Component } from './page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,10 @@ import { MyCookieService } from './services/my-cookie.service';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent,
+    DashboardComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

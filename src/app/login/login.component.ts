@@ -28,7 +28,10 @@ export class LoginComponent implements OnInit {
 
   doLogin(){
     this.apiLoading=true;
-    this.api.postDataApi('login',this.loginData).subscribe((response : any) => {
+    var fd = new FormData();
+    fd.append('email', this.loginData.email);
+    fd.append('password', this.loginData.password);
+    this.api.postDataApi('login',fd).subscribe((response : any) => {
       if(response.errorCode == '0'){
         this.setCookieAndNavigate(response.data[0]);
       } else {
@@ -45,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   setCookieAndNavigate(user){
     this.myCookieService.setCookie('user', user);
-    this.router.navigate(['home']);
+    this.router.navigate(['dashboard']);
   }
 
 

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:'http://investfarapp.com/api/'
+  baseUrl:'http://maanya.tech/angular/api/'
 };
 
 /*

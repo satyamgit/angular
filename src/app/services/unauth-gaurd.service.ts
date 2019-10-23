@@ -14,7 +14,7 @@ export class UnAuthGaurdService implements CanActivate {
 
   canActivate() { 
     if(this.myCookieService.checkCookie('user')){
-      this.router.navigate(['home']); 
+      this.router.navigate(['dashboard']); 
     } else{
       return true;
     }     

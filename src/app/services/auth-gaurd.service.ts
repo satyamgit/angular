@@ -6,7 +6,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route
   providedIn: 'root'
 })
 export class AuthGaurdService implements CanActivate {
-
+  user:any;
   constructor(
     private myCookieService : MyCookieService,
     private router : Router
@@ -14,7 +14,7 @@ export class AuthGaurdService implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) { 
     if(this.myCookieService.checkCookie('user')){
-      return true;
+        return true;
     } else{
       this.router.navigate(['/']); 
     }     

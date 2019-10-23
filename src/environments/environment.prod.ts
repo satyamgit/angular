@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl:'http://investfarapp.com/api/'
+  baseUrl:'http://maanya.tech/angular/api/'
 };
