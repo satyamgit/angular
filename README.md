@@ -1,81 +1,49 @@
-
-
-
-import { TestBed } from '@angular/core/testing';
-import { HttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { SearchFormComponent } from './search-form.component';
+import { ApiService } from '../services/api.service';
 import { of } from 'rxjs';
-import { ApiService } from './api.service';
 
-describe('ApiService', () => {
-  let service: ApiService;
-  let httpClient: HttpClient;
+describe('SearchFormComponent', () => {
+  let component: SearchFormComponent;
+  let fixture: ComponentFixture<SearchFormComponent>;
+  let apiService: ApiService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    const apiServiceMock = {
+      Post: jest.fn().mockReturnValue(of({}))
+    };
+
+    await TestBed.configureTestingModule({
+      declarations: [SearchFormComponent],
+      imports: [ReactiveFormsModule],
       providers: [
-        ApiService,
-        {
-          provide: HttpClient,
-          useValue: {
-            post: jest.fn(), // Mock the HttpClient's post method
-          },
-        },
-      ],
-    });
+        FormBuilder,
+        { provide: ApiService, useValue: apiServiceMock }
+      ]
+    }).compileComponents();
 
-    service = TestBed.inject(ApiService);
-    httpClient = TestBed.inject(HttpClient);
+    fixture = TestBed.createComponent(SearchFormComponent);
+    component = fixture.componentInstance;
+    apiService = TestBed.inject(ApiService);
+
+    fixture.detectChanges();
   });
 
-  it('should call HttpClient.post with correct URL and data', () => {
-    const endpoint = 'submit-data';
-    const data = { name: 'John Doe', age: 30, email: 'john.doe@example.com' };
-    const mockResponse = { success: true };
-
-    // Spy on the HttpClient's post method
-    const postSpy = jest.spyOn(httpClient, 'post').mockReturnValue(of(mockResponse));
-
-    // Call the postData method
-    service.postData(endpoint, data).subscribe((response) => {
-      // Verify the response
-      expect(response).toEqual(mockResponse);
+  it('should call ApiService Post method with form data when basicSearch is called', () => {
+    // Arrange: set up the form values
+    component.searchForm.setValue({
+      formName: 'testName',
+      formNumber: '123'
     });
 
-    // Assertions
-    const url = `${service['apiUrl']}/${endpoint}`; // Combine base API URL with endpoint
-    expect(postSpy).toHaveBeenCalledWith(url, data, expect.any(Object)); // Verify URL, data, and headers
-    expect(postSpy).toHaveBeenCalledTimes(1); // Ensure post method was called once
+    // Act: trigger the basicSearch method
+    component.basicSearch();
+
+    // Assert: check if the Post method was called with the correct parameters
+    expect(apiService.Post).toHaveBeenCalledWith('form/search', {
+      formName: 'testName',
+      formNumber: '123'
+    });
   });
 });
-
-
-
-
-
-# Application
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
